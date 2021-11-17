@@ -1,42 +1,32 @@
-import pika
-from pika import exceptions
+import os
 import json
-from app.core.exceptions import AppException
-from config import Config
+from loguru import logger
+from kafka import KafkaProducer
+from kafka.errors import KafkaError
 
 
-class PikaClient(object):
-    def __init__(self, queue: str):
-        self.url = Config.RABBITMQ_SERVER
-        self.queue = queue
-        self.channel = None
-        self.connection = None
+KAFKA_BOOTSTRAP_SERVERS = os.getenv("KAFKA_BOOTSTRAP_SERVERS",
+                                    default="localhost:9092")
+bootstrap_servers = KAFKA_BOOTSTRAP_SERVERS.split("|")
 
-    def connect(self):
-        print(f"Connecting to server @{self.url}")
-        try:
-            self.connection = pika.BlockingConnection(
-                pika.ConnectionParameters(host=self.url)
-                # pika.URLParameters(self.url)
-            )
-        except exceptions.AMQPConnectionError as e:
-            print("Failed to connect to the broker server")
-            raise AppException.BadRequest(context=e.args)
-        self.channel = self.connection.channel()
-        self.channel.queue_declare(queue=self.queue, durable=True)
+logger.info(f"KAFKA BOOTSTRAP SERVERS -> {bootstrap_servers}")
 
-    def publish_message(self, message: list):
-        self.connect()
-        print("processing message!!!!")
-        for index, item in enumerate(message):
-            try:
-                self.channel.basic_publish(
-                    exchange='', routing_key=self.queue, body=json.dumps(item),
-                    properties=pika.BasicProperties(delivery_mode=2)
-                )
-            except exceptions.ConnectionClosed as e:
-                print("no connection")
-                raise AppException.BadRequest(
-                    context=e.args)
-        print("messages successfully queued")
-        self.connection.close()
+
+def json_serializer(data):
+    return json.dumps(data).encode("UTF-8")
+
+
+def publish_to_kafka(topic, value):
+    producer = KafkaProducer(
+        bootstrap_servers=bootstrap_servers,
+        value_serializer=json_serializer,
+    )
+    try:
+        logger.info(f"message publishing to kafka -> {value}")
+        producer.send(topic=topic, value=value)
+    except KafkaError as e:
+        logger.error(
+            f"Failed to publish record on to Kafka broker with error {e}"
+        )
+    else:
+        logger.info("message publish to kafka successful")

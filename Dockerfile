@@ -22,4 +22,6 @@ COPY . .
 
 #CMD python /app/main/main.py 0.0.0.0:8000
 
-CMD [ "flask", "run", "--host=0.0.0.0"]
+#CMD [ "flask", "run", "--host=0.0.0.0"]
+
+ENTRYPOINT ["app/script/entrypoint"]

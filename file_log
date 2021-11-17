@@ -1,0 +1,3 @@
+[31m2021-11-15T16:37:33.829601+0000[0m [32mINFO[0m Hello from loguru!
+2021-11-15T16:38:32.170347+0000 INFO Hello from loguru!
+2021-11-15T16:40:53.501556+0000 INFO Hello from loguru!

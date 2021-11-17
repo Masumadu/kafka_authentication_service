@@ -28,8 +28,9 @@ UPDATE_INFO = {
 class TestCustomerViews(BaseTestCase):
     @pytest.mark.customer
     def test_create_customer(self):
-        response = self.client.post(url_for("customer.create_customer"),
-                                    json=NEW_DATA)
+        with patch("app.services.notification_service.publish_to_kafka") as publish_to_kafka:
+            response = self.client.post(url_for("customer.create_customer"),
+                                        json=NEW_DATA)
         self.assertEqual(CustomerModel.query.count(), 2)
         self.assertEqual(response.status_code, 201)
         self.assertIsInstance(response.json, dict)
@@ -37,6 +38,7 @@ class TestCustomerViews(BaseTestCase):
         self.assertEqual(response.json["name"], NEW_DATA["name"])
         self.assertEqual(response.json["email"], NEW_DATA["email"])
         self.assertEqual(response.json["username"], NEW_DATA["username"])
+        self.assertTrue(publish_to_kafka.called)
 
     @pytest.mark.customer
     def test_customer_signin_invalid_details(self):
@@ -44,13 +46,15 @@ class TestCustomerViews(BaseTestCase):
             "username": "username",
             "password": "password"
         }
-        response = self.client.post(
-            url_for("customer.sign_in_admin"), json=customer_info
-        )
+        with patch("app.services.notification_service.publish_to_kafka") as publish_to_kafka:
+            response = self.client.post(
+                url_for("customer.sign_in"), json=customer_info
+            )
         self.assert200(response)
         self.assertIsInstance(response.json, dict)
         self.assertEqual(self.shared_responses.signin_invalid_details(),
                          response.json)
+        self.assertTrue(publish_to_kafka.called)
 
     @pytest.mark.customer
     def test_customer_signin_unverified(self):
@@ -58,13 +62,17 @@ class TestCustomerViews(BaseTestCase):
             "username": self.customer.get("username"),
             "password": self.customer.get("password")
         }
-        response = self.client.post(
-            url_for("customer.sign_in_admin"), json=customer_info
-        )
+        with patch(
+                "app.services.notification_service.publish_to_kafka") as publish_to_kafka:
+            response = self.client.post(
+                url_for("customer.sign_in"), json=customer_info
+            )
         self.assert200(response)
         self.assertIsInstance(response.json, dict)
-        self.assertEqual(self.shared_responses.signin_unverified_account(),
-                         response.json)
+        self.assertEqual(
+            self.shared_responses.signin_unverified_account(), response.json
+        )
+        self.assertTrue(publish_to_kafka.called)
 
     @pytest.mark.customer
     def test_customer_account_verification(self):
@@ -109,13 +117,15 @@ class TestCustomerViews(BaseTestCase):
             "username": self.customer.get("username"),
             "password": self.customer.get("password")
         }
-        response = self.client.post(
-            url_for("customer.sign_in_admin"), json=customer_info
-        )
+        with patch("app.services.notification_service.publish_to_kafka") as publish_to_kafka:
+            response = self.client.post(
+                url_for("customer.sign_in"), json=customer_info
+            )
         self.assert200(response)
         self.assertIsInstance(response.json, dict)
         self.assertEqual(self.shared_responses.signin_valid_details().keys(),
                          response.json.keys())
+        self.assertTrue(publish_to_kafka.called)
 
     @pytest.mark.customer
     def test_notification_event_signal(self):

@@ -2,8 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="df88efe1-3bb2-48ad-a592-b3084a35f9a8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/authentication_service.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/authentication_service.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/api_v1/endpoints/customer_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/api_v1/endpoints/customer_view.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/customer_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/customer_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/extensions.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/extensions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/producer.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/producer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/services/notification_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/notification_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/utils/message_queue_body.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/utils/message_queue_body.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.db" beforeDir="false" afterPath="$PROJECT_DIR$/test.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,15 +32,15 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/app/extensions.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/producer.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/config.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/app/services/notification_service.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/app/models/customer_model.py" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/Dockerfile" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/docker-compose.yml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/app/extensions.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Dockerfile" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/models/customer_model.py" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/app/__init__.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/app/controllers/customer_controller.py" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/app/producer.py" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="205MmMNEqaQc2JySXn1WG4DW3UA" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -41,7 +52,7 @@
     <property name="ASKED_MARK_IGNORED_FILES_AS_EXCLUDED" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../APACHE_KAFKA_NOTIFICATION_SERVICE" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -193,5 +204,16 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/services/notification_service.py</url>
+          <line>10</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

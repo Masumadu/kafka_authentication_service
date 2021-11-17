@@ -8,5 +8,4 @@ db = SQLAlchemy()
 migrate = Migrate()
 ma = Marshmallow()
 celery = Celery()
-
 db.__setattr__("GUID", GUID)

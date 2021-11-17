@@ -35,6 +35,7 @@ class Config:
     # REDIS
     REDIS_SERVER = os.getenv("REDIS_SERVER")
     REDIS_PASSWORD = os.getenv("REDIS_PASSWORD")
+
     # General
     DEBUG = False
     DEVELOPMENT = False

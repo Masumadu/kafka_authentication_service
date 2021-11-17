@@ -1,11 +1,7 @@
 # local imports
 from app.core.service_result import handle_result
-from app.schema import (
-    ReadCustomerSchema, CreateCustomerSchema
-)
-from app.repositories import (
-    CustomerRepository
-)
+from app.schema import ReadCustomerSchema, CreateCustomerSchema
+from app.repositories import CustomerRepository
 from app.services import RedisService
 from app.controllers import CustomerController
 
@@ -41,5 +37,5 @@ def account_verification(token):
 
 
 @customer.route("/signin", methods=["POST"])
-def sign_in_admin():
+def sign_in():
     return customer_controller.sign_in(request.json)
